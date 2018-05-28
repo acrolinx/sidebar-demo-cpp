@@ -1,0 +1,8 @@
+Debug/
+*.Demo.Sidebar.Cpp/Debug
+*.Demo.Sidebar.Cpp/*.Demo.Sidebar.Cpp.vcxproj.user
+*.Demo.Sidebar.Cpp/*.Demo.Sidebar.Cpp.aps
+*.Demo.Sidebar.Cpp.sdf
+*.Demo.Sidebar.Cpp.suo
+*.Demo.Sidebar.Cpp.opensdf
+ipch/
