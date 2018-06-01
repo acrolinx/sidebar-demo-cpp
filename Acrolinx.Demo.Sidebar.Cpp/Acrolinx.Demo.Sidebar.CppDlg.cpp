@@ -15,9 +15,9 @@ CAcrolinxDemoSidebarCppDlg::CAcrolinxDemoSidebarCppDlg(CWnd* pParent /*=NULL*/)
     : CDialogEx(CAcrolinxDemoSidebarCppDlg::IDD, pParent)
     , m_documentModelCurrent(nullptr)
     , m_documentModelRequest(nullptr)
+    , m_minimumSize(0,0)
 {
     m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
-
 }
 
 void CAcrolinxDemoSidebarCppDlg::DoDataExchange(CDataExchange* pDX)
@@ -32,6 +32,8 @@ BEGIN_MESSAGE_MAP(CAcrolinxDemoSidebarCppDlg, CDialogEx)
     ON_WM_SYSCOMMAND()
     ON_WM_PAINT()
     ON_WM_QUERYDRAGICON()
+    ON_WM_GETMINMAXINFO()
+    ON_WM_SIZE()
 END_MESSAGE_MAP()
 
 
@@ -40,6 +42,8 @@ END_MESSAGE_MAP()
 BOOL CAcrolinxDemoSidebarCppDlg::OnInitDialog()
 {
     CDialogEx::OnInitDialog();
+
+    InitializeResizer();
 
     // Set the icon for this dialog.  The framework does this automatically
     //  when the application's main window is not a dialog
@@ -53,6 +57,10 @@ BOOL CAcrolinxDemoSidebarCppDlg::OnInitDialog()
     //Set combo box read-only
     CEdit* comboBoxEditControl = (CEdit*)m_format.GetWindow(GW_CHILD);
     comboBoxEditControl->SetReadOnly();
+
+    RegisterControlForAutoSizing(IDC_ACROLINXSIDEBAR1, 0, 0, 100, 100);
+    RegisterControlForAutoSizing(IDC_DOCREFTEXTBOX, 0, 0, 100, 0);
+    RegisterControlForAutoSizing(IDC_TEXTBOX, 0, 0, 0, 100);
 
     // Initialize Acrolinx Sidebar
     SetInitParameters();
@@ -119,7 +127,7 @@ void CAcrolinxDemoSidebarCppDlg::SetInitParameters(void)
 
     /*
        To set language of sidebar same as of application uncomment following line and pass appropiate string (en, de, fr, sv, ja).
-       Bydefault sidebar language is set same as user UI language for the current user. If the current user has not set a language, then the preferred language set for the system is used. 
+       Bydefault sidebar language is set same as user UI language for the current user. If the current user has not set a language, then the preferred language set for the system is used.
        If there is no preferred language set for the system, then the system default UI language (also known as "install language") is used.
     */
     //m_sidebar.SetClientLocale(_T("en"));
@@ -349,4 +357,101 @@ Input_Format CAcrolinxDemoSidebarCppDlg::GetFormatFromString(CString format)
     }
 
     return inputFormat;
+}
+
+
+void CAcrolinxDemoSidebarCppDlg::RegisterControlForAutoSizing(int iID, double horizontalMovement, double verticalMovement, double width, double height)
+{
+    ASSERT((horizontalMovement + width) <= 100.0);
+    ASSERT((verticalMovement + height) <= 100.0);
+
+    ControlSizing cs;
+
+    GetDlgItem(iID, &cs.m_hWnd);
+    ASSERT(cs.m_hWnd != NULL);
+    cs.m_horizontalMovement = horizontalMovement / 100.0;
+    cs.m_verticalMovement = verticalMovement / 100.0;
+    cs.m_width = width / 100.0;
+    cs.m_height = height / 100.0;
+    ::GetWindowRect(cs.m_hWnd, &cs.m_initialSize);
+    ScreenToClient(cs.m_initialSize);
+    m_ctrlSizeList.AddTail(cs);
+}
+
+
+void CAcrolinxDemoSidebarCppDlg::InitializeResizer(void)
+{
+    if ((m_minimumSize.cx == 0) && (m_minimumSize.cy == 0))
+    {
+        CRect windowRect;
+        GetWindowRect(windowRect);
+        m_minimumSize = windowRect.Size();
+    }
+
+    CRect clientRect;
+    GetClientRect(clientRect);
+    m_initialSize = clientRect.Size();
+
+}
+
+
+void CAcrolinxDemoSidebarCppDlg::OnGetMinMaxInfo(MINMAXINFO* lpMMI)
+{
+    CDialogEx::OnGetMinMaxInfo(lpMMI);
+
+    if (lpMMI->ptMinTrackSize.x < m_minimumSize.cx)
+    {
+        lpMMI->ptMinTrackSize.x = m_minimumSize.cx;
+    }
+
+    if (lpMMI->ptMinTrackSize.y < m_minimumSize.cy)
+    {
+        lpMMI->ptMinTrackSize.y = m_minimumSize.cy;
+    }
+}
+
+
+void CAcrolinxDemoSidebarCppDlg::OnSize(UINT nType, int cx, int cy)
+{
+    CDialogEx::OnSize(nType, cx, cy);
+
+    int xDelta = cx - m_initialSize.cx;
+    int yDelta = cy - m_initialSize.cy;
+
+    HDWP hWindowDeferPos = NULL;
+    POSITION    pos;
+
+    pos = m_ctrlSizeList.GetHeadPosition();
+    while (pos)
+    {
+        ControlSizing element;
+        element = m_ctrlSizeList.GetNext(pos);
+
+        if (element.m_hWnd != NULL)
+        {
+            CRect rectCurrent(element.m_initialSize);
+            rectCurrent.OffsetRect(int(xDelta * element.m_horizontalMovement), int(yDelta * element.m_verticalMovement));
+            rectCurrent.right += int(xDelta * element.m_width);
+            rectCurrent.bottom += int(yDelta * element.m_height);
+
+            if (hWindowDeferPos == NULL)
+            {
+                hWindowDeferPos = BeginDeferWindowPos(m_ctrlSizeList.GetSize());
+            }
+
+            UINT windowPosFlags = SWP_NOACTIVATE | SWP_NOOWNERZORDER | SWP_NOZORDER;
+
+            if ((element.m_width != 0.0) || (element.m_height != 0.0))
+            {
+                windowPosFlags |= SWP_NOCOPYBITS;
+            }
+
+            DeferWindowPos(hWindowDeferPos, element.m_hWnd, NULL, rectCurrent.left, rectCurrent.top, rectCurrent.Width(), rectCurrent.Height(), windowPosFlags);
+        }
+    }
+
+    if (hWindowDeferPos != NULL)
+    {
+        EndDeferWindowPos(hWindowDeferPos);
+    }
 }

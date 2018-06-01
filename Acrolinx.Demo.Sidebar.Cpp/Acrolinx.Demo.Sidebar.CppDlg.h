@@ -7,6 +7,16 @@
 #include "acrolinxsidebar1.h"
 #include "afxwin.h"
 
+typedef struct
+{
+    HWND        m_hWnd;
+    double      m_horizontalMovement;
+    double      m_verticalMovement;
+    double      m_width;
+    double      m_height;
+    CRect       m_initialSize;
+}ControlSizing;
+
 // CAcrolinxDemoSidebarCppDlg dialog
 class CAcrolinxDemoSidebarCppDlg : public CDialogEx
 {
@@ -39,18 +49,30 @@ public:
     DECLARE_EVENTSINK_MAP()
     void InitFinishedAcrolinxsidebar1();
     void RequestCheckAcrolinxsidebar1(LPDISPATCH checkOptions);
-    CString GetDialogText(int dialogID);
-public:
     void SelectRangesAcrolinxsidebar1(LPDISPATCH matches);
-    CEdit m_textbox;
     void ReplaceRangesAcrolinxsidebar1(LPDISPATCH matches);
-    CComboBox m_format;
     void CheckedAcrolinxsidebar1(LPDISPATCH checkResult);
     void SidebarLoadedAcrolinxsidebar1(LPCTSTR url);
+    CString GetDialogText(int dialogID);
+public:
+    CEdit m_textbox;
+    CComboBox m_format;
+
 private:
     IDocumentModelPtr m_documentModelCurrent;
     IDocumentModelPtr m_documentModelRequest;
 public:
     virtual BOOL PreTranslateMessage(MSG* pMsg);
     Input_Format GetFormatFromString(CString format);
+
+private:
+    CList<ControlSizing, ControlSizing&> m_ctrlSizeList;
+    CSize   m_initialSize;
+    CSize   m_minimumSize;
+private:
+    void RegisterControlForAutoSizing(int iID, double horizontalMovement, double verticalMovement, double width, double height);
+    void InitializeResizer(void);
+public:
+    afx_msg void OnGetMinMaxInfo(MINMAXINFO* lpMMI);
+    afx_msg void OnSize(UINT nType, int cx, int cy);
 };
