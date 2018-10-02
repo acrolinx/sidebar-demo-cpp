@@ -1,79 +1,91 @@
 # Acrolinx Windows C++ Sidebar Demo
 
-Demo code for an integration of the Acrolinx Sidebar in a C++ application
+This is a showcase for integrating the [Acrolinx](http://www.acrolinx.com/) Sidebar into a Windows C++ application.
+
+See: [Getting Started with Custom Integrations](https://support.acrolinx.com/hc/en-us/articles/205687652-Getting-Started-with-Custom-Integrations)
+
+## Live Demo
+
+[Acrolinx Sidebar Web Live Demo](https://acrolinx.github.io/acrolinx-sidebar-demo/samples/index.html)
+
+## The Acrolinx Sidebar
+
+The Acrolinx Sidebar is designed to show up beside the window where you edit your content.
+You use it for checking, reviewing, and correcting your content.
+To get an impression what the Sidebar looks like in existing integrations, have a look at
+[Get Started With the Sidebar](https://support.acrolinx.com/hc/en-us/articles/205697451-Get-Started-With-the-Sidebar).
 
 ## Prerequisites
 
-Please contact Acrolinx SDK support (sdk-support@acrolinx.com) for initial consulting.
-We like to schedule a kickoff meeting to answer any questions about your integration project.
-After the meeting, we provide you with test server credentials and configuration settings you need to get started.
+Please contact [Acrolinx SDK support](https://github.com/acrolinx/acrolinx-coding-guidance/blob/master/topics/sdk-support.md)
+for consulting and getting your integration certified.
+This sample works with a test license on an internal Acrolinx URL.
+This license is only meant for demonstration and developing purposes.
+Once you finished your integration, you'll have to get a license for your integration from Acrolinx.
+  
+Acrolinx offers different other SDKs, and examples for developing integrations.
 
-## Configuration of the Sample
+Before you start developing your own integration, you might benefit from looking into:
 
-The Acrolinx checks if a connecting integration is allowed to connect. To connect to a server, you must provide a valid integration signature by editing the code:
+* [Getting Started with Custom Integrations](https://support.acrolinx.com/hc/en-us/articles/205687652-Getting-Started-with-Custom-Integrations),
+* the [Guidance for the Development of Acrolinx Integrations](https://github.com/acrolinx/acrolinx-coding-guidance),
+* the [Acrolinx SDKs](https://github.com/acrolinx?q=sdk), and
+* the [Acrolinx Demo Projects](https://github.com/acrolinx?q=demo).
 
-In the file:
+## Getting Started
 
-* `Acrolinx.Demo.Sidebar.Cpp\Acrolinx.Demo.Sidebar.CppDlg.cpp`
+### Run Locally
 
-Find following line and add the signature provided by Acrolinx.
-```cpp
-m_sidebar.SetClientSignature
-```
+1. Make sure that you have installed Microsoft Visual Studio with C++ support version 2010.
+2. Register Acrolinx.Sidebar.SDK.dll found under Acrolinx.Demo.Sidebar.Cpp\modules by running [RegisterAcrolinx.bat](modules/RegisterAcrolinx.bat).
+3. Open [`Acrolinx.Demo.Sidebar.Cpp.sln`](Acrolinx.Demo.Sidebar.Cpp.sln) in Visual Studio.
+4. Build and run the solution (F5).
 
+![Screenshot of C++ Sidebar Example](/doc/sample.png)
 
-## How to Start
+### Using the SDK
 
-Make sure that you have installed Microsoft Visual Studio with C++ support version 2010.
+1. Open the solution file `Acrolinx.Demo.Sidebar.Cpp.sln` with Visual Studio.
+2. After you register Acrolinx.Sidebar.SDK.dll, you can start using it in your project. In the Designer View of your dialog, insert Acrolinx Sidebar Control from ActiveX Control list.
+   ![Choose Items](/doc/chooseitems.png)
+3. You should be able to see Acrolinx Sidebar on your dialog.
+4. Usually you dock the Acrolinx Sidebar to the right side of your dialog:
+   ![Dialog](/doc/dialog1.png)
+5. Set the test signature: `SW50ZWdyYXRpb25EZXZlbG9wbWVudERlbW9Pbmx5`.
+6. Somewhere in your initialization code, tell the Sidebar to start:
+    ```cpp
+    m_sidebar.Start();
+    ```
+    ![Start Sidebar](/doc/startcode.png)
+7. Run the application. If you see the Acrolinx Sidebar, then everything went well.
+8. The next step is to implement the extraction and the events of the Sidebar.
+   ![Events](/doc/events.png)
+9. Have a look at the sample source code provided in the sample project.
 
-Register Acrolinx.Sidebar.SDK.dll found under Acrolinx.Demo.Sidebar.Cpp\modules by running [RegisterAcrolinx.bat](https://github.com/acrolinx/sidebar-demo-cpp/blob/master/modules/RegisterAcrolinx.bat "register dll").
+## SDK Features
 
+1. Provides [lookup](https://github.com/acrolinx/acrolinx-coding-guidance/blob/master/topics/lookup/diff.md) functionality.
+2. **Start page**: Provides interactive way to sign in to Acrolinx with built-in error handling.
+3. Provides logging using [EasyLogging++ v8.91](https://github.com/muflihun/easyloggingpp).
+4. **Acrolinx Storage**: Applications using the IE web browser control may be denied to access LocalStorage. The SDK uses its own storage mechanism using the Windows registry.
+   * **Registry path**: HKCU\Software\Acrolinx\Plugins\Storage\AcrolinxStorage\[KEY]
+   * **Fallback path**: HKLM\Software\Acrolinx\Plugins\Storage\AcrolinxStorage\[KEY]
+5. **Acrolinx Adapter**: Provides reusable functionality for all integrations.
 
-![Screen Shot of C++ Sidebar Example](/doc/sample.png)
+## References
 
-## How to Use the Sidebar in Your Integration
-
-Open the solution file `Acrolinx.Demo.Sidebar.Cpp.sln` with Visual Studio.
-
-After you register Acrolinx.Sidebar.SDK.dll, you can start using it in your project. In the Designer View of your dialog, insert Acrolinx Sidebar Control from ActiveX Control list.
-
-![Choose Items](/doc/chooseitems.png)
-
-You should be able to see Acrolinx Sidebar on your dialog.
-
-Usually you dock the Acrolinx Sidebar to the right side of your dialog:
-
-![Dialog](/doc/dialog1.png)
-
-Set the integration signature, which you received from Acrolinx. (Add file link)
-
-
-Somewhere in your initialization code, tell the Sidebar to start:
-
-	m_sidebar.Start();
-
-![Start Sidebar](/doc/startcode.png)
-
-Run the application. If you see the Acrolinx Sidebar, then everything went well.
-
-The next step is to implement the extraction and the events of the Sidebar:
-
-![Events](/doc/events.png)
-
-Have a look at the sample source code provided in the sample project.
-
-## CORS
-* You must have CORS enabled for Acrolinx (https://support.acrolinx.com/hc/en-us/articles/203851132-Enable-Cross-Origin-Resource-Sharing-CORS-on-your-Core-Server).
+* This DEMO is built on the [Sidebar SDK C++](https://github.com/acrolinx/sidebar-sdk-cpp).
+* The Sidebar SDKs are based on the [Acrolinx Sidebar Interface](https://acrolinx.github.io/sidebar-sdk-js/).
 
 ## License
 
-Copyright 2018 Acrolinx GmbH
+Copyright 2018-present Acrolinx GmbH
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+You may obtain a copy of the License at:
 
-http://www.apache.org/licenses/LICENSE-2.0
+[http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -81,4 +93,4 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-For more information visit: http://www.acrolinx.com
+For more information visit: [http://www.acrolinx.com](http://www.acrolinx.com)
