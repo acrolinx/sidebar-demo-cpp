@@ -46,7 +46,8 @@ Before you start developing your own integration, you might benefit from looking
 ### Using the SDK
 
 1. Open the solution file `Acrolinx.Demo.Sidebar.Cpp.sln` with Visual Studio.
-2. After you register Acrolinx.Sidebar.SDK.dll, you can start using it in your project. In the Designer View of your dialog, insert Acrolinx Sidebar Control from ActiveX Control list.
+2. After you register Acrolinx.Sidebar.SDK.dll, you can start using it in your project.
+   In the Designer View of your dialog, insert Acrolinx Sidebar Control from ActiveX Control list.
    ![Choose Items](/doc/chooseitems.png)
 3. You should be able to see Acrolinx Sidebar on your dialog.
 4. Usually you dock the Acrolinx Sidebar to the right side of your dialog:
@@ -67,9 +68,10 @@ Before you start developing your own integration, you might benefit from looking
 1. Provides [lookup](https://github.com/acrolinx/acrolinx-coding-guidance/blob/master/topics/lookup/diff.md) functionality.
 2. **Start page**: Provides interactive way to sign in to Acrolinx with built-in error handling.
 3. Provides logging using [EasyLogging++ v8.91](https://github.com/muflihun/easyloggingpp).
-4. **Acrolinx Storage**: Applications using the IE web browser control may be denied to access LocalStorage. The SDK uses its own storage mechanism using the Windows registry.
-   * **Registry path**: `HKCU\Software\Acrolinx\Plugins\Storage\AcrolinxStorage\[KEY]`
-   * **Fallback path**: `HKLM\Software\Acrolinx\Plugins\Storage\AcrolinxStorage\[KEY]`
+4. **Acrolinx Storage**: Applications using the IE web browser control may be denied to access LocalStorage.
+   The SDK uses its own storage mechanism using the Windows registry.
+   + **Registry path**: `HKCU\Software\Acrolinx\Plugins\Storage\AcrolinxStorage\[KEY]`
+   + **Fallback path**: `HKLM\Software\Acrolinx\Plugins\Storage\AcrolinxStorage\[KEY]`
 5. **Acrolinx Adapter**: Provides reusable functionality for all integrations.
 
 ## References
