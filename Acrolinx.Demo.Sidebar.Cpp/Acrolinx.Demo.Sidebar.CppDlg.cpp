@@ -236,7 +236,7 @@ void CAcrolinxDemoSidebarCppDlg::SelectRangesAcrolinxsidebar1(LPDISPATCH matches
             startRange->GetStart(&orgStartOffset);
             endRange->GetEnd(&orgEndOffset);
             BSTR content;
-            m_documentModelCurrent->GetOrginalContent(&content);
+            m_documentModelCurrent->GetOriginalContent(&content);
 
             CString matchContent(content);
             matchContent = matchContent.Mid(orgStartOffset, orgEndOffset - orgStartOffset);
