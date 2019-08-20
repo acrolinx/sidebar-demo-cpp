@@ -67,7 +67,7 @@ Before you start developing your own integration, you might benefit from looking
 
 1. Provides lookup functionality.
 2. **Start page**: Provides interactive way to sign in to Acrolinx with built-in error handling.
-3. Provides logging using [EasyLogging++ v8.91](https://github.com/muflihun/easyloggingpp).
+3. Provides logging using [Plog v1.1.4](https://github.com/SergiusTheBest/plog).
 4. **Acrolinx Storage**: Applications using the IE web browser control may be denied to access LocalStorage.
    The SDK uses its own storage mechanism using the Windows registry.
    + **Registry path**: `HKCU\Software\Acrolinx\Plugins\Storage\AcrolinxStorage\[KEY]`
