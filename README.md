@@ -37,7 +37,7 @@ Before you start developing your own integration, you might benefit from looking
 ### Run Locally
 
 1. Make sure that you have installed Microsoft Visual Studio with C++ support version 2010.
-2. Register Acrolinx.Sidebar.SDK.dll found under Acrolinx.Demo.Sidebar.Cpp\modules by running [RegisterAcrolinx.bat](modules/RegisterAcrolinx.bat).
+2. Download and install [Acrolinx.Sidebar.SDK](https://github.com/acrolinx/sidebar-sdk-cpp/releases)
 3. Open [`Acrolinx.Demo.Sidebar.Cpp.sln`](Acrolinx.Demo.Sidebar.Cpp.sln) in Visual Studio.
 4. Build and run the solution (F5).
 
