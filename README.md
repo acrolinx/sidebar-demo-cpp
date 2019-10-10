@@ -77,7 +77,7 @@ Before you start developing your own integration, you might benefit from looking
 ## References
 
 * This DEMO is built on the [Sidebar SDK C++](https://github.com/acrolinx/sidebar-sdk-cpp).
-* The Sidebar SDKs are based on the [Acrolinx Sidebar Interface](https://acrolinx.github.io/sidebar-sdk-js/).
+* The Sidebar SDKs are based on the [Acrolinx Sidebar Interface](https://acrolinx.github.io/sidebar-interface/).
 
 ## License
 
