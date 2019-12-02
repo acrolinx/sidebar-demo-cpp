@@ -54,9 +54,11 @@ Before you start developing your own integration, you might benefit from looking
    ![Dialog](/doc/dialog1.png)
 5. Set the test signature: `SW50ZWdyYXRpb25EZXZlbG9wbWVudERlbW9Pbmx5`.
 6. Somewhere in your initialization code, tell the Sidebar to start:
+
     ```cpp
     m_sidebar.Start();
     ```
+
     ![Start Sidebar](/doc/startcode.png)
 7. Run the application. If you see the Acrolinx Sidebar, then everything went well.
 8. The next step is to implement the extraction and the events of the Sidebar.
@@ -68,7 +70,7 @@ Before you start developing your own integration, you might benefit from looking
 1. Provides lookup functionality.
 2. **Start page**: Provides interactive way to sign in to Acrolinx with built-in error handling.
 3. Provides logging using [Plog v1.1.4](https://github.com/SergiusTheBest/plog).
-4. **Acrolinx Storage**: Applications using the IE web browser control may be denied to access LocalStorage.
+4. **Acrolinx Storage**: Applications using the Internet Explorer web browser control may be denied to access LocalStorage.
    The SDK uses its own storage mechanism using the Windows registry.
    + **Registry path**: `HKCU\Software\Acrolinx\Plugins\Storage\AcrolinxStorage\[KEY]`
    + **Fallback path**: `HKLM\Software\Acrolinx\Plugins\Storage\AcrolinxStorage\[KEY]`
