@@ -45,9 +45,6 @@
     <ClInclude Include="TextBoxAdapter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\modules\AcrolinxInterface.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Acrolinx.Adapter.Demo.Sidebar.Cpp.cpp">
@@ -70,5 +67,8 @@
     <ResourceCompile Include="Acrolinx.Adapter.Demo.Sidebar.Cpp.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="$(MSBuildThisFileDirectory)..\..\natvis\wil.natvis" />
   </ItemGroup>
 </Project>
