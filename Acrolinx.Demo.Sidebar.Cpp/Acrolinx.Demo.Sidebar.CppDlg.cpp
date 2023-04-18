@@ -122,7 +122,7 @@ void CAcrolinxDemoSidebarCppDlg::SetInitParameters(void)
     //m_sidebar.SetStartPageSourceLocation(_T("e:\\startpage\\Acrolinx.Startpage.dll"));
 
     //m_sidebar.SetClientSignature("ASK_ACROLINX_FOR_A_CLIENT_SIGNATURE");
-    m_sidebar.SetClientSignature(_T("SW50ZWdyYXRpb25EZXZlbG9wbWVudERlbW9Pbmx5"));
+    m_sidebar.SetClientSignature(_T("eyJhbGciOiJFUzI1NiJ9.eyJpZCI6IjYyMWY4MjVkLTcyNzAtNmI2Ny05MGI2LWNhMDAxNDMyMDYwOCIsIm5hbWUiOiJJbnRlZ3JhdGlvbiBTREsgU2lnbmF0dXJlIDIwMjIiLCJpYXQiOjE2NDYyMzIxNjB9.0Yln5rypk38h_WWzX6AdZ6YjEEeYVtU92c3A6bx-zotxuWdjBMXxkHbIVSfdtAtQboLjTFRX8i9AAnhoZG-Ilw"));
     m_sidebar.SetSupportCheckSelection(true);
 
     /*

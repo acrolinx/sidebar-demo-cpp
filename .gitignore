@@ -9,3 +9,5 @@ ipch/
 Acrolinx.Demo.Sidebar.Cpp.VC.db
 .vs
 Release/
+packages
+acrolinx-sdk

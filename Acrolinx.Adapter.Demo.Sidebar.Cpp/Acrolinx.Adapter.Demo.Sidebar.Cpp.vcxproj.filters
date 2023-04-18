@@ -21,6 +21,7 @@
     <None Include="res\Acrolinx.Adapter.Demo.Sidebar.Cpp.ico">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Acrolinx.Adapter.Demo.Sidebar.Cpp.h">
