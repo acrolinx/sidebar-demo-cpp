@@ -14,7 +14,7 @@ on:
   push:
     branches: [ "develop" ]
   pull_request:
-    branches: [ "develop" ]
+    branches: [ "develop", "main" ]
   schedule:
     - cron: "0 2 * * *"
   workflow_dispatch:
@@ -25,16 +25,10 @@ on:
         default: "Manual Workflow Run"
 
 env:
-  # Path to the solution file relative to the root of the project.
   SOLUTION_FILE_PATH: .
-
-  # Configuration type to build.
-  # You can convert this to a build matrix if you need coverage of multiple configuration types.
-  # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
   BUILD_CONFIGURATION: Release
-
-permissions:
-  contents: read
+  Solution_Name: Acrolinx.Demo.Sidebar.Cpp.sln
+  BUILD_NUMBER: ${{ github.run_number }}
 
 jobs:
   build:
@@ -42,6 +36,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+          fetch-depth: 0
 
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1.3.1
@@ -50,16 +46,17 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: nuget restore ${{env.SOLUTION_FILE_PATH}}
 
-    - name: Build
+    - name: Build x86
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      # Add additional options to the MSBuild command line here (like platform or verbosity level).
-      # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
-      run: |
-        msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Platform=Win32 ${{env.SOLUTION_FILE_PATH}}
+      run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Platform=Win32 ${{env.SOLUTION_FILE_PATH}}
+
+    - name: Build x64
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Platform=x64 ${{env.SOLUTION_FILE_PATH}}
     
     - uses: actions/upload-artifact@v3
       with:
         name: Demo Artifacts
         path: |
-          .\Acrolinx.Sidebar.SDK.Setup\bin\Release\*
           .\Release\*
+          .\x64\Release\*
