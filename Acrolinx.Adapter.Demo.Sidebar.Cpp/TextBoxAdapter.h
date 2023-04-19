@@ -1,7 +1,13 @@
 /* Copyright (c) 2018 Acrolinx GmbH */
 
 #pragma once
-#include "..\modules\AcrolinxInterface.h"
+
+// The libs are copied from packages\Acrolinx.Sidebar.SDK.<version>\lib to ../acrolinx-sdk/lib in a pre build event
+#if defined _M_X64
+#include "..\acrolinx-sdk\lib\x64\AcrolinxInterface.h"
+#else
+#include "..\acrolinx-sdk\lib\x86\AcrolinxInterface.h"
+#endif
 class TextBoxAdapter :
     public CUniversalAdapter
 {

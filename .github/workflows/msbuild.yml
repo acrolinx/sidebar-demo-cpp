@@ -1,0 +1,63 @@
+name: C++ Sidebar Demo Build
+
+# ## TODOs #############################
+# Sonar
+# JDK setup for Sonar
+# Nuget restore
+# Code Signing
+# Nuget Package
+# Push Nuget to GitHub/Nuget org
+# Create GitHub release
+# #######################################
+
+on:
+  push:
+    branches: [ "develop" ]
+  pull_request:
+    branches: [ "develop", "main" ]
+  schedule:
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: "Trigger Comment (Optional)"
+        required: false
+        default: "Manual Workflow Run"
+
+env:
+  SOLUTION_FILE_PATH: .
+  BUILD_CONFIGURATION: Release
+  Solution_Name: Acrolinx.Demo.Sidebar.Cpp.sln
+  BUILD_NUMBER: ${{ github.run_number }}
+  NUGET_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+          fetch-depth: 0
+
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v1.3.1
+
+    - name: Restore NuGet packages
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: nuget restore ${{env.SOLUTION_FILE_PATH}}
+
+    - name: Build x86
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Platform=Win32 ${{env.SOLUTION_FILE_PATH}}
+
+    - name: Build x64
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Platform=x64 ${{env.SOLUTION_FILE_PATH}}
+    
+    - uses: actions/upload-artifact@v3
+      with:
+        name: Demo Artifacts
+        path: |
+          .\Release\*
+          .\x64\Release\*

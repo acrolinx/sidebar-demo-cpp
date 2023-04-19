@@ -7,4 +7,7 @@ Debug/
 *.Demo.Sidebar.Cpp.opensdf
 ipch/
 Acrolinx.Demo.Sidebar.Cpp.VC.db
-.vs/Acrolinx.Demo.Sidebar.Cpp/v14/.suo
+.vs
+Release/
+packages
+acrolinx-sdk
