@@ -41,31 +41,9 @@ END_MESSAGE_MAP()
 
 BOOL CAcrolinxDemoSidebarCppDlg::OnInitDialog()
 {
-    CDialogEx::OnInitDialog();
-
-    InitializeResizer();
-
-    // Set the icon for this dialog.  The framework does this automatically
-    //  when the application's main window is not a dialog
-    SetIcon(m_hIcon, TRUE);			// Set big icon
-    SetIcon(m_hIcon, FALSE);		// Set small icon
-
-    //Set default text in Edit Control
-    m_textbox.SetWindowTextW(L"This texxt contains intentional errorrs.\r\nAnother kine containning mistakas.");
-    m_format.SetCurSel(2);
-
-    //Set combo box read-only
-    CEdit* comboBoxEditControl = (CEdit*)m_format.GetWindow(GW_CHILD);
-    comboBoxEditControl->SetReadOnly();
-
-    RegisterControlForAutoSizing(IDC_ACROLINXSIDEBAR1, 0, 0, 100, 100);
-    RegisterControlForAutoSizing(IDC_DOCREFTEXTBOX, 0, 0, 100, 0);
-    RegisterControlForAutoSizing(IDC_TEXTBOX, 0, 0, 0, 100);
-
     // Initialize Acrolinx Sidebar
     SetInitParameters();
     m_sidebar.Start();
-
 
     return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -122,7 +100,7 @@ void CAcrolinxDemoSidebarCppDlg::SetInitParameters(void)
     //m_sidebar.SetStartPageSourceLocation(_T("e:\\startpage\\Acrolinx.Startpage.dll"));
 
     //m_sidebar.SetClientSignature("ASK_ACROLINX_FOR_A_CLIENT_SIGNATURE");
-    m_sidebar.SetClientSignature(_T("signature-provided-by-acrolinx"));
+    m_sidebar.SetClientSignature(_T("SW50ZWdyYXRpb25EZXZlbG9wbWVudERlbW9Pbmx5"));
     m_sidebar.SetSupportCheckSelection(true);
 
     /*
