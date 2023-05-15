@@ -2,9 +2,9 @@ name: C++ Sidebar Demo Build
 
 on:
   push:
-    branches: [ "develop" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "develop", "main" ]
+    branches: [ "main" ]
   schedule:
     - cron: "0 2 * * *"
   workflow_dispatch:
