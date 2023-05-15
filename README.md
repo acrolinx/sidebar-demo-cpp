@@ -36,34 +36,36 @@ Before you start developing your own integration, you might benefit from looking
 
 ### Run Locally
 
-1. Make sure that you have installed Microsoft Visual Studio with C++ support version 2010.
-2. Download and install [Acrolinx.Sidebar.SDK](https://github.com/acrolinx/sidebar-sdk-cpp/releases)
-3. Open [`Acrolinx.Demo.Sidebar.Cpp.sln`](Acrolinx.Demo.Sidebar.Cpp.sln) in Visual Studio.
-4. Build and run the solution (F5).
+1. Make sure that you have installed Microsoft Visual Studio 2017 with C++ support (MSVC anf MFC)
+2. Open [`Acrolinx.Demo.Sidebar.Cpp.sln`](Acrolinx.Demo.Sidebar.Cpp.sln) in Visual Studio.
+3. Build and run the solution (F5).
 
 ![Screenshot of C++ Sidebar Example](/doc/sample.png)
 
 ### Using the SDK
 
 1. Open the solution file `Acrolinx.Demo.Sidebar.Cpp.sln` with Visual Studio.
-2. After you register Acrolinx.Sidebar.SDK.dll, you can start using it in your project.
+2. Add C++ SDK as dependency from [Nuget](https://www.nuget.org/packages/Acrolinx.Sidebar.SDK.CPP/)
+3. Register the Acrolinx.Sidebar.SDK.dll from `packages\Acrolinx.Sidebar.SDK.CPP.<version>\lib\<architecture>`
+4. Use `/scripts/RegisterAcrolinx.bat` or `regsvr32 Acrolinx.Sidebar.SDK.dll` ro register the Dll.
+5. After you register Acrolinx.Sidebar.SDK.dll, you can start using it in your project.
    In the Designer View of your dialog, insert Acrolinx Sidebar Control from ActiveX Control list.
    ![Choose Items](/doc/chooseitems.png)
-3. You should be able to see Acrolinx Sidebar on your dialog.
-4. Usually you dock the Acrolinx Sidebar to the right side of your dialog:
+6. You should be able to see Acrolinx Sidebar on your dialog.
+7. Usually you dock the Acrolinx Sidebar to the right side of your dialog:
    ![Dialog](/doc/dialog1.png)
-5. Set the test signature: `SW50ZWdyYXRpb25EZXZlbG9wbWVudERlbW9Pbmx5`.
-6. Somewhere in your initialization code, tell the Sidebar to start:
+8. Set the test signature: `SW50ZWdyYXRpb25EZXZlbG9wbWVudERlbW9Pbmx5`.
+9. Somewhere in your initialization code, tell the Sidebar to start:
 
     ```cpp
     m_sidebar.Start();
     ```
 
     ![Start Sidebar](/doc/startcode.png)
-7. Run the application. If you see the Acrolinx Sidebar, then everything went well.
-8. The next step is to implement the extraction and the events of the Sidebar.
+10. Run the application. If you see the Acrolinx Sidebar, then everything went well.
+11. The next step is to implement the extraction and the events of the Sidebar.
    ![Events](/doc/events.png)
-9. Have a look at the sample source code provided in the sample project.
+12. Have a look at the sample source code provided in the sample project.
 
 ## SDK Features
 

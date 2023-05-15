@@ -38,7 +38,14 @@
 
 #include <afxcontrolbars.h>     // MFC support for ribbons and control bars
 
-#import "../modules/Acrolinx.Sidebar.SDK.tlb" no_namespace, raw_interfaces_only
+
+// The libs are copied from packages\Acrolinx.Sidebar.SDK.<version>\lib to ../acrolinx-sdk/lib in a pre build event
+#if defined _M_X64
+#import "../acrolinx-sdk/lib/x64/Acrolinx.Sidebar.SDK.tlb" no_namespace, raw_interfaces_only
+#else
+#import "../acrolinx-sdk/lib/x86/Acrolinx.Sidebar.SDK.tlb" no_namespace, raw_interfaces_only
+#endif
+
 
 #ifdef _UNICODE
 #if defined _M_IX86
