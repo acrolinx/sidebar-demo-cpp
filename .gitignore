@@ -12,3 +12,6 @@ Release/
 packages
 acrolinx-sdk
 distrib/
+
+# Eclipse
+.project
