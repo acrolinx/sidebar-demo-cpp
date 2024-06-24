@@ -31,7 +31,7 @@ jobs:
           fetch-depth: 0
 
     - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@v2.0.0
+      uses: microsoft/setup-msbuild@v2
     
     - name: Install components
       run: .\.github\scripts\install-vs-components.ps1
