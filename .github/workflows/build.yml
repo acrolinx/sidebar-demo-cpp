@@ -1,10 +1,8 @@
-name: C++ Sidebar Demo Build
+name: Build
 
 on:
   push:
-    branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
   schedule:
     - cron: "0 2 * * *"
   workflow_dispatch:
@@ -24,7 +22,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
       with:
-          fetch-depth: 0
+        fetch-depth: 0
 
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v2
