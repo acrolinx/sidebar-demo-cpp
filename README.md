@@ -34,13 +34,11 @@ Before you start developing your own integration, you might benefit from looking
 
 ## Requirements
 
-This SDK uses Microsoft WebView 2 based on Microsoft Edge Chromium to render the Sidebar.
+This SDK leverages Microsoft WebView2, built on Microsoft Edge Chromium, to render the Sidebar. Starting with Windows 11, Microsoft includes the Evergreen WebView2 Runtime by default.
 
-Microsoft will include the Evergreen WebView2 Runtime as part of the Windows 11 operating system.
+For earlier versions of Windows, please install the WebView2 Evergreen Runtime manually.
 
-For prior operating systems - Please install WebView 2 evergreen runtime.
-
-Download and install "Evergreen Standalone Installer" from [Microsoft](https://developer.microsoft.com/en-us/microsoft-edge/webview2/)
+You can download and install the Evergreen Standalone [Installer](https://developer.microsoft.com/en-us/microsoft-edge/webview2/) from Microsoft's official site.
 
 ## Getting Started
 
