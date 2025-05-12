@@ -4,17 +4,11 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-    reviewers:
-      - abhijeetnarvekar
   - package-ecosystem: "nuget"
     directory: "/Acrolinx.Adapter.Demo.Sidebar.Cpp/"
     schedule:
       interval: "daily"
-    reviewers:
-      - abhijeetnarvekar
   - package-ecosystem: "nuget"
     directory: "/Acrolinx.Demo.Sidebar.Cpp/"
     schedule:
       interval: "daily"
-    reviewers:
-      - abhijeetnarvekar
